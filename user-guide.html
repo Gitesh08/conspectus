@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conspectus User Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Google Sans', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        h1,
+        h2,
+        h3 {
+            color: #1a73e8;
+        }
+        
+        nav {
+            background: linear-gradient(to right, white, #185abc);
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo span {
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            margin: 0 5px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: #185abc;
+        }
+        
+        section {
+            background-color: white;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .feedback-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #1a73e8;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-family: 'Google Sans', Arial, sans-serif;
+            transition: background-color 0.3s;
+        }
+        
+        .feedback-button:hover {
+            background-color: #185abc;
+        }
+        
+        #feedback-form button:hover {
+            background-color: #185abc;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>User Guide</h1>
+    </header>
+
+    <nav>
+        <div class="logo">
+            <img src="images/header.svg" alt="Conspectus Logo">
+        </div>
+        <div class="nav-links">
+            <a href="#overview">Overview</a>
+            <a href="#kickstart">Kickstart</a>
+            <a href="#demo">Demo</a>
+            <a href="#api-usage">API Usage</a>
+            <a href="#feedback">Feedback</a>
+        </div>
+    </nav>
+
+    <main>
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>Conspectus is a powerful Chrome extension that leverages built-in AI to convert descriptions into beautiful diagrams directly in your browser.</p>
+            <h3>Key Features</h3>
+            <ul>
+                <li>Uses Chrome's built-in AI to understand diagram requirements</li>
+                <li>Generates various diagram types: flowcharts, sequence diagrams, class diagrams, state diagrams, and entity relationship diagrams</li>
+                <li>Simple, intuitive interface with real-time diagram generation</li>
+                <li>Clean, modern design with a responsive side panel interface</li>
+                <li>Zoom controls and diagram download functionality</li>
+                <li>AI-powered diagram description improvement suggestions</li>
+                <li>Diagram summarization feature</li>
+            </ul>
+        </section>
+
+        <section id="kickstart">
+            <h2>Kickstart</h2>
+            <h3>Installation</h3>
+            <ol>
+                <li>Clone the repository: <code>git clone https://github.com/Gitesh08/conspectus.git</code></li>
+                <li>Open Chrome and navigate to <code>chrome://extensions/</code></li>
+                <li>Enable "Developer mode" in the top right corner</li>
+                <li>Click "Load unpacked" and select the extension directory</li>
+            </ol>
+            <h3>Setup</h3>
+            <h4>Requirements</h4>
+            <ul>
+                <li>Chrome version 129.0.6639.0 or later (Canary or Dev channel recommended)</li>
+                <li>At least 22 GB of free storage space</li>
+                <li>GPU with 4 GB+ VRAM</li>
+                <li>Windows 10/11, macOS 13 (Ventura) or later, or Linux</li>
+            </ul>
+            <h4>Enabling AI Features</h4>
+            <ol>
+                <li>Open Chrome and go to <code>chrome://flags</code></li>
+                <li>Enable the following flags:
+                    <ul>
+                        <li><code>#optimization-guide-on-device-model</code></li>
+                        <li><code>#prompt-api-for-gemini-nano</code></li>
+                        <li><code>#rewriter-api-for-gemini-nano</code></li>
+                        <li><code>#summarization-api-for-gemini-nano</code></li>
+                    </ul>
+                </li>
+                <li>Relaunch Chrome</li>
+                <li>Navigate to <code>chrome://components</code> and refresh the page</li>
+                <li>Locate the "Optimization Guide On Device Model" component</li>
+                <li>Click on the "Update" button for this component</li>
+                <li>Wait for the update to complete (this may take a few minutes)</li>
+                <li>After a successful update, the status should show as "Up-to-date"</li>
+            </ol>
+            <div class="warning">
+                <p>⚠️ If you don't see the "Optimization Guide On Device Model" component, please check <a href="https://github.com/lightning-joyce/chromeai/issues/6#issuecomment-2434695388" rel="noopener" target="_blank">this discussion</a> for troubleshooting
+                    steps.
+                </p>
+            </div>
+        </section>
+
+        <section id="demo">
+            <h2>Demo Video</h2>
+            <p>Watch this demo video to see how to use Conspectus:</p>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <section id="api-usage">
+            <h2>API Usage</h2>
+            <p>Conspectus utilizes three main AI APIs provided by Chrome:</p>
+            <h3>1. Prompt API</h3>
+            <p>The Prompt API allows Conspectus to interpret natural language instructions and convert them into diagram specifications.</p>
+            <pre><code>const session = await window.ai.languageModel.create({
+    systemPrompt: getSystemPrompt(diagramType)
+});
+const mermaidSyntax = await session.prompt(query);</code></pre>
+            <h3>2. Rewriter API</h3>
+            <p>The Rewriter API is used to enhance and improve diagram descriptions provided by users.</p>
+            <pre><code>const diagramRewriter = await window.ai.rewriter.create({
+    context: 'Transform user-provided input into a precise, technical, concise description...'
+});
+const enhancedDescription = await diagramRewriter.rewrite(userInput);</code></pre>
+            <h3>3. Summarization API</h3>
+            <p>The Summarization API helps condense complex diagram information into concise summaries.</p>
+            <pre><code>const diagramSummarizer = await window.ai.summarizer.create({
+    type: 'key-points',
+    length: 'medium',
+    context: 'You are an expert at analyzing and summarizing technical diagrams...'
+});
+const diagramSummary = await diagramSummarizer.summarize(mermaidSyntax);</code></pre>
+        </section>
+
+        <section id="feedback">
+            <h2>Feedback</h2>
+            <p>We value your input! Click the button below to send your feedback via email.</p>
+            <a href="mailto:gmahadik8080@gmail.com?subject=Feedback for Conspectus&body=Hi,%0A%0AWrite your feedback here..." id="feedback-email" class="feedback-button">Send Feedback</a>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const feedbackForm = document.getElementById('feedback-form');
+            const feedbackResponse = document.getElementById('feedback-response');
+
+            feedbackForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+
+                // Simulating feedback submission
+                setTimeout(() => {
+                    feedbackResponse.textContent = `Thank you, ${name}! Your feedback has been received.`;
+                    feedbackResponse.classList.remove('hidden');
+                    feedbackForm.reset();
+                }, 1000);
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
