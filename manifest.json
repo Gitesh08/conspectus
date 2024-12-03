@@ -1,0 +1,33 @@
+{
+    "name": "Conspectus",
+    "version": "0.1",
+    "manifest_version": 3,
+    "description": "A powerful Chrome extension that leverages built-in AI to convert descriptions into beautiful diagrams directly in your browser!",
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": [
+        "sidePanel"
+    ],
+    "side_panel": {
+        "default_path": "sidepanel/index.html"
+    },
+    "action": {
+        "default_icon": {
+            "16": "images/icon16.png",
+            "32": "images/icon32.png",
+            "48": "images/icon48.png",
+            "128": "images/icon128.png"
+        },
+        "default_title": "Conspectus - diagram generator"
+    },
+    "content_security_policy": {
+        "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+    },
+    "web_accessible_resources": [{
+        "resources": [
+            "lib/mermaid.min.js"
+        ],
+        "matches": ["<all_urls>"]
+    }]
+}
