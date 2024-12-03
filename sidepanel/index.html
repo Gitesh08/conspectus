@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conspectus</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <header class="site-header"><img src="/images/header.svg" alt="Conspectus" class="header-image" /></header>
+    <div class="container">
+        <section class="input-section">
+            <form id="diagram-form">
+                <div class="input-wrapper"><label for="messageInput" class="input-label">Diagram Description</label><textarea id="messageInput" name="messageInput" placeholder="Describe the diagram you want to create..." rows="5" aria-label="Diagram description input"></textarea>
+                    <button type="button" id="suggest-btn">✦ Improve Description</button>
+                </div>
+                <div class="diagram-type-selector"><label for="diagramType" class="input-label">Select Diagram Type</label>
+                    <div class="select-wrapper"><select id="diagramType" name="diagramType" class="diagram-select" aria-label="Diagram type selection">
+                        <option value="flowchart">Flowchart - Visualize processes and workflows</option>
+                        <option value="sequence">Sequence Diagram - Show interactions between components</option>
+                        <option value="classType">Class Diagram - Show relationships between classes</option>
+                        <option value="state">State Diagram - Visualize state transitions</option>
+                        <option value="er">ER Diagram - Show entity relationships</option></select>
+                    </div>
+                </div>
+                <nav class="controls">
+                    <button type="submit" id="sendBtn" class="button-primary">✦ Generate Diagram</button>
+                    <button type="reset" id="resetBtn" class="button-secondary">Reset</button>
+                    <button type="button" id="userguide" class="button-secondary" onclick="location.href='../user-guide.html'">User Guide</button>
+
+                </nav>
+            </form>
+        </section>
+        <section class="output-section">
+            <article id="loading-spinner" class="loading hidden"><span class="spinner" aria-label="Loading"></span>
+                <p>✦ Generating diagram...</p>
+            </article>
+            <article id="error" class="error hidden" role="alert" aria-live="polite"></article>
+            <article id="diagram-output" class="diagram-container hidden" aria-live="polite">
+                <header class="diagram-header">
+                    <h2>Generated Diagram</h2>
+                </header>
+                <div class="diagram-content"></div>
+            </article>
+            <div class="summarize-button-container">
+                <button id="summarize-btn" class="button-primary hidden">✦ Explain Diagram</button>
+            </div>
+            <article id="summary-output" class="summary-container hidden" aria-live="polite">
+                <header class="summary-header">
+                    <h2>Diagram Summary</h2>
+                </header>
+                <div class="summary-content"></div>
+            </article>
+        </section>
+    </div>
+    <div class="disclaimer">
+        <span>Built with 𖹭 by</span>
+        <a href="https://github.com/Gitesh08" target="_blank" rel="noopener" class="gradient-text">
+        Gitesh Mahadik ✦
+    </a>
+    </div>
+    <script src="../lib/mermaid.min.js"></script>
+    <script src="index.js" type="module"></script>
+</body>
+
+</html>
