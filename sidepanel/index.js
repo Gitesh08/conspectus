@@ -18,6 +18,7 @@ const diagramContainer = document.getElementById('diagram-output');
 const diagramContent = diagramContainer.querySelector('.diagram-content');
 const suggestBtn = document.getElementById('suggest-btn');
 const summarizeBtn = document.getElementById('summarize-btn');
+const userGuideBtn = document.querySelector('#userguideBtn');
 
 /* Global Variables */
 let currentScale = 1;
@@ -392,6 +393,13 @@ async function reset() {
     }
 }
 
+async function userGuide() {
+    const userGuideButton = document.getElementById('userguideBtn');
+    if (userGuideButton) {
+        window.location.href = 'user-guide.html';
+    }
+}
+
 async function initDefaults() {
     if (!window.ai) {
         showError('Error: window.ai not supported in this browser');
@@ -439,6 +447,13 @@ diagramForm.addEventListener('submit', async(e) => {
 });
 
 resetBtn.addEventListener('click', reset);
+
+userGuideBtn.addEventListener('click', async() => {
+    const userGuideButton = document.getElementById('userguideBtn');
+    if (userGuideButton) {
+        window.location.href = '/sidepanel/user-guide.html';
+    }
+});
 
 suggestBtn.addEventListener('click', async() => {
     const messageInput = document.getElementById('messageInput');
@@ -604,11 +619,27 @@ summarizeBtn.addEventListener('click', async() => {
 
         summaryContent.innerHTML = '';
 
+        // Parse and format the summary for bold and bullet points
         const paragraphs = diagramSummary.split('\n').filter(p => p.trim() !== '');
+        let ul = null; // Track unordered list
+
         paragraphs.forEach(paragraph => {
-            const p = document.createElement('p');
-            p.textContent = paragraph.trim();
-            summaryContent.appendChild(p);
+            if (paragraph.startsWith('*')) {
+                if (!ul) {
+                    ul = document.createElement('ul'); // Create a new unordered list
+                    summaryContent.appendChild(ul);
+                }
+
+                const li = document.createElement('li');
+                li.innerHTML = paragraph.slice(1).trim().replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Apply bold formatting within list
+                ul.appendChild(li);
+            } else {
+                if (ul) ul = null; // End the list if paragraph doesn't start with `*`
+
+                const p = document.createElement('p');
+                p.innerHTML = paragraph.trim().replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Apply bold formatting
+                summaryContent.appendChild(p);
+            }
         });
 
         const copyButton = document.createElement('button');
@@ -622,7 +653,6 @@ summarizeBtn.addEventListener('click', async() => {
 
         copyButton.addEventListener('click', () => {
             const textToCopy = paragraphs.join('\n');
-
             const tempTextArea = document.createElement('textarea');
             tempTextArea.value = textToCopy;
             document.body.appendChild(tempTextArea);
@@ -640,7 +670,7 @@ summarizeBtn.addEventListener('click', async() => {
                 copyButton.innerHTML = `
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1-2-2h9a2 2 0 0 1-2 2v1"></path>
                     </svg>
                 `;
             }, 2000);
@@ -661,6 +691,7 @@ summarizeBtn.addEventListener('click', async() => {
         summarizeBtn.textContent = '✦ Summarize Diagram';
     }
 });
+
 
 /* Initialization */
 document.addEventListener('DOMContentLoaded', () => {
